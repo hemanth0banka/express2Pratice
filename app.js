@@ -1,13 +1,13 @@
 const express = require("express")
 const app = express()
-const port = 2004
+const books = require("./books.js")
+const port = 2001
+
 app.use(express.json())
-app.get("/user/:id",(req,res)=>{
-    let name = req.query.name
-    let role = req.query.role
-    res.status(200).send(` Welcome ${name}, your role is ${role}`)
+
+app.use("/books",books)
+app.use((req,res)=>{
+    res.status(404).send(`Page Not Found`)
 })
 
-app.listen(port,()=>{
-    console.log(`Listening at port ${port}`)
-})
+app.listen(port,()=>{console.log(`listening at port ${port}`)})
